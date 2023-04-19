@@ -1,11 +1,9 @@
 package com.application.model;
 
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Contains main info about particular game.
@@ -15,35 +13,6 @@ import java.time.LocalDateTime;
  */
 @Entity
 public class Game extends AbstractEntity {
-
-    /**
-     * Enumeration with game statuses
-     */
-    public enum HistoricalStatus {
-        NEW_AGE("Актуальная"),
-        HISTORICAL("Историческая");
-
-        private final String textualStatus;
-
-        /**
-         * Constructor
-         *
-         * @param textualStatus textual description/name of game status
-         */
-        HistoricalStatus(@NonNull String textualStatus) {
-            this.textualStatus = textualStatus;
-        }
-
-        /**
-         * Gets textual description/name of game status
-         *
-         * @return textual description/name of game status
-         */
-        @NonNull
-        public String getTextualStatus() {
-            return textualStatus;
-        }
-    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nevsky_team")
@@ -66,28 +35,6 @@ public class Game extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "season")
     private Season season;
-
-    @Column(name = "historical_status")
-    @Enumerated(EnumType.STRING)
-    private HistoricalStatus historicalStatus;
-
-    private LocalDateTime created;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "creator")
-    private Principal creator;
-
-    private LocalDateTime edited;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "editor")
-    private Principal editor;
-
-    private LocalDateTime removed;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "remover")
-    private Principal remover;
 
     /**
      * Constructor
@@ -196,67 +143,5 @@ public class Game extends AbstractEntity {
         this.season = season;
     }
 
-    @Nullable
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(@NonNull LocalDateTime created) {
-        this.created = created;
-    }
-
-    @Nullable
-    public Principal getCreator() {
-        return creator;
-    }
-
-    public void setCreator(@NonNull Principal creator) {
-        this.creator = creator;
-    }
-
-    @Nullable
-    public LocalDateTime getEdited() {
-        return edited;
-    }
-
-    public void setEdited(@NonNull LocalDateTime edited) {
-        this.edited = edited;
-    }
-
-    @Nullable
-    public Principal getEditor() {
-        return editor;
-    }
-
-    public void setEditor(@NonNull Principal editor) {
-        this.editor = editor;
-    }
-
-    @Nullable
-    public LocalDateTime getRemoved() {
-        return removed;
-    }
-
-    public void setRemoved(@NonNull LocalDateTime removed) {
-        this.removed = removed;
-    }
-
-    @Nullable
-    public Principal getRemover() {
-        return remover;
-    }
-
-    public void setRemover(@NonNull Principal remover) {
-        this.remover = remover;
-    }
-
-    @NonNull
-    public HistoricalStatus getHistoricalStatus() {
-        return historicalStatus;
-    }
-
-    public void setHistoricalStatus(@Nullable HistoricalStatus historicalStatus) {
-        this.historicalStatus = historicalStatus;
-    }
 }
 
