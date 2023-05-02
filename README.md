@@ -4,7 +4,7 @@ Nevsky 26/54 is amateur football (soccer) command from Saint Petersburg, Russia.
 attempt for personal players' statistics gathering and aggregation automation. The project is on very early steps of 
 its implementation, so it will be improved and rework in many parts.
 
-This particular application is reader application which provides ability of players and games reading.
+This particular application is reader application which provides ability of players and games view only.
 
 ## Running the application
 
