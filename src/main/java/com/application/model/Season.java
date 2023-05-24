@@ -37,6 +37,7 @@ public class Season extends AbstractEntity {
         PLCH_QUALIFICATION("Кубковая квалификация ПЛЧ"),
         PLCH_ONE_DAY("Однодневный турнир ПЛЧ"),
         PLCH_RED_CUP("Ред Кап ПЛЧ"),
+        PLCH_SUMMER_CUP_6x6("Летний Кубок 6х6 ПЛЧ"),
         NFL("Невская футбольная лига"),
         FFSPB_CUP_6x6("Кубок ФФСПб 6х6"),
         FRIENDLY_GAMES("Товарищеские игры"),
