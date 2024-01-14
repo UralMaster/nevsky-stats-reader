@@ -30,6 +30,7 @@ public class Season extends AbstractEntity {
         PLCH_WINTER_THIRD("Зимний Третий дивизион ПЛЧ"),
         PLCH_WINTER_NORTH("Зимняя Лига Север ПЛЧ"),
         PLCH_WINTER_CUP("Зимний кубок ПЛЧ"),
+        PLCH_OBVODNY_DIVISION("Дивизион \"Обводный\" ПЛЧ"),
         PLCH_CL("Лига чемпионов ПЛЧ"),
         PLCH_EL("Лига Европы (Кубок) ПЛЧ"),
         PLCH_INTERTOTO("Кубок Интертото ПЛЧ"),
