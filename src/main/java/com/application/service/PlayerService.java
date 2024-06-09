@@ -2,12 +2,18 @@ package com.application.service;
 
 import com.application.model.Player;
 import com.application.repository.PlayerRepository;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
+/**
+ * Service which contains {@link Player}s related logic - search, count, etc.
+ *
+ * @author Ilya Ryabukhin
+ * @since 18.04.2023
+ */
 @Service
 public class PlayerService {
 
@@ -17,16 +23,29 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
 
-    public List<Player> findAllPlayers(String stringFilter) {
+    /**
+     * Finds all players with optional applying of name related filter
+     *
+     * @param stringFilter filter for searching by name
+     * @return list of {@link Player}s
+     */
+    @NonNull
+    public List<Player> findAllPlayersByName(@Nullable String stringFilter) {
         if (stringFilter == null || stringFilter.isEmpty()) {
             return playerRepository.findAll();
         } else {
-            return playerRepository.search(stringFilter);
+            return playerRepository.searchByName(stringFilter);
         }
     }
 
-    public Optional<Player> findPlayerById(UUID id) {
-        return playerRepository.findById(id);
+    /**
+     * Finds all active players
+     *
+     * @return list of all active {@link Player}s
+     */
+    @NonNull
+    public List<Player> findAllActivePlayers() {
+        return playerRepository.searchOnlyActive();
     }
 
     public long countPlayers() {

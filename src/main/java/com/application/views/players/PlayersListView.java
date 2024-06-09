@@ -16,6 +16,12 @@ import com.vaadin.flow.router.Route;
 
 import java.util.List;
 
+/**
+ * Table for tab with {@link Player}s
+ *
+ * @author Ilya Ryabukhin
+ * @since 18.04.2023
+ */
 @Route(value = "players", layout = MainLayout.class)
 @PageTitle("Игроки | Н26/54 статистика")
 public class PlayersListView extends VerticalLayout {
@@ -115,7 +121,7 @@ public class PlayersListView extends VerticalLayout {
     }
 
     private void updateList() {
-        grid.setItems(playerService.findAllPlayers(filterText.getValue()));
+        grid.setItems(playerService.findAllPlayersByName(filterText.getValue()));
     }
 
 }
