@@ -12,6 +12,7 @@
     <properties>
         <vaadin.version>14.9.7</vaadin.version>
         <postgres.version>42.3.6</postgres.version>
+        <vk.api.sdk.version>1.0.15</vk.api.sdk.version>
     </properties>
 
     <parent>
@@ -138,6 +139,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vk.api</groupId>
+            <artifactId>sdk</artifactId>
+            <version>${vk.api.sdk.version}</version>
         </dependency>
 
         <dependency>

@@ -1,9 +1,11 @@
 package com.application.model;
 
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 
 /**
  * Contains main info about player.
@@ -40,6 +42,7 @@ public class Player extends AbstractEntity {
 
     @NotEmpty
     private String name = "";
+    private LocalDate birthday;
 
     private int games;
     @Column(name = "games_26")
@@ -152,6 +155,23 @@ public class Player extends AbstractEntity {
 
     public void setName(@NonNull String name) {
         this.name = name;
+    }
+
+    /**
+     * @return birthday if it's present, otherwise - null
+     */
+    @Nullable
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    /**
+     * Sets birthday
+     *
+     * @param birthday for setting
+     */
+    public void setBirthday(@Nullable LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     public int getGames() {
@@ -530,5 +550,16 @@ public class Player extends AbstractEntity {
     public void setPointsFriendly(int pointsFriendly) {
         this.pointsFriendly = pointsFriendly;
     }
+
+    /**
+     * Simplifies string representation of {@link Player} for logging purposes
+     *
+     * @return simplified string representation of {@link Player}
+     */
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }
 

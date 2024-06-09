@@ -18,6 +18,10 @@ public interface PlayerRepository extends JpaRepository<Player, UUID> {
 
     @Query("select c from Player c " +
             "where lower(c.name) like lower(concat('%', :searchTerm, '%')) ")
-    List<Player> search(@Param("searchTerm") String searchTerm);
+    List<Player> searchByName(@Param("searchTerm") String searchTerm);
+
+    @Query("select c from Player c " +
+            "where c.activityStatus = 'ACTIVE' ")
+    List<Player> searchOnlyActive();
 
 }
