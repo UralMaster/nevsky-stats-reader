@@ -82,8 +82,6 @@ public class VkApiBirthdayMessagesSendingService {
     private String prepareMessage() {
         LocalDate currentDate = LocalDate.now();
         LocalDate tomorrowDate = currentDate.plusDays(1);
-        LocalDate twoDaysInFuture = currentDate.plusDays(2);
-        LocalDate threeDaysInFuture = currentDate.plusDays(3);
 
         List<Player> activePlayersWithBirthdays = playerService.findAllActivePlayers().stream()
                 .filter(player -> player.getBirthday() != null)
@@ -101,16 +99,6 @@ public class VkApiBirthdayMessagesSendingService {
         List<Player> tomorrow = activePlayersWithBirthdays.stream()
                 .filter(player -> player.getBirthday().getMonth() == tomorrowDate.getMonth()
                         && player.getBirthday().getDayOfMonth() == tomorrowDate.getDayOfMonth())
-                .collect(Collectors.toUnmodifiableList());
-
-        List<Player> twoDaysBefore = activePlayersWithBirthdays.stream()
-                .filter(player -> player.getBirthday().getMonth() == twoDaysInFuture.getMonth()
-                        && player.getBirthday().getDayOfMonth() == twoDaysInFuture.getDayOfMonth())
-                .collect(Collectors.toUnmodifiableList());
-
-        List<Player> threeDaysBefore = activePlayersWithBirthdays.stream()
-                .filter(player -> player.getBirthday().getMonth() == threeDaysInFuture.getMonth()
-                        && player.getBirthday().getDayOfMonth() == threeDaysInFuture.getDayOfMonth())
                 .collect(Collectors.toUnmodifiableList());
 
         StringBuilder messageBuilder = new StringBuilder("Ближайшие дни рождения:");
@@ -153,40 +141,6 @@ public class VkApiBirthdayMessagesSendingService {
 
             logger.debug("Tomorrow's = {} birthday related message will contain info regarding the = {}",
                     tomorrowDate, tomorrow);
-        }
-
-        if (!twoDaysBefore.isEmpty()) {
-            isEmptyResult = false;
-            messageBuilder.append("ЧЕРЕЗ 2 ДНЯ - ")
-                    .append(twoDaysInFuture)
-                    .append(":")
-                    .append("\n");
-
-            for (Player player : twoDaysBefore) {
-                messageBuilder.append(player.getName())
-                        .append("\n");
-            }
-
-            messageBuilder.append("\n");
-
-            logger.debug("Before 2 days = {} birthday related message will contain info regarding the = {}",
-                    twoDaysInFuture, twoDaysBefore);
-        }
-
-        if (!threeDaysBefore.isEmpty()) {
-            isEmptyResult = false;
-            messageBuilder.append("ЧЕРЕЗ 3 ДНЯ - ")
-                    .append(threeDaysInFuture)
-                    .append(":")
-                    .append("\n");
-
-            for (Player player : threeDaysBefore) {
-                messageBuilder.append(player.getName())
-                        .append("\n");
-            }
-
-            logger.debug("Before 3 days = {} birthday related message will contain info regarding the = {}",
-                    threeDaysInFuture, threeDaysBefore);
         }
 
         logger.debug("Today's = {} birthday related message was prepared", currentDate);
