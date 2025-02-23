@@ -78,8 +78,13 @@ public class PlayersListView extends VerticalLayout {
         grid.getColumnByKey("redCards").setHeader("КК");
 
         grid.addColumn(player -> player.getActivityStatus().getTextualStatus()).setHeader("Статус").setKey("activityStatus");
+        grid.addColumn(game -> "").setKey("rowIndex");
+        grid.addAttachListener(event -> grid.getColumnByKey("rowIndex").getElement().executeJs(
+                "this.renderer = function(root, column, rowData) {root.textContent = rowData.index + 1}"
+        ));
 
         grid.setColumnOrder(
+                grid.getColumnByKey("rowIndex"),
                 grid.getColumnByKey("name"),
                 grid.getColumnByKey("games26"),
                 grid.getColumnByKey("games54"),
@@ -103,6 +108,7 @@ public class PlayersListView extends VerticalLayout {
         );
 
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+        grid.getColumnByKey("rowIndex").setAutoWidth(false).setWidth("4em");
 
         grid.sort(List.of(new GridSortOrder<>(grid.getColumnByKey("games"), SortDirection.DESCENDING)));
 

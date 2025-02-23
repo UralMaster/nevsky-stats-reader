@@ -9,6 +9,12 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
+/**
+ * Table for tab with {@link Participance}s
+ *
+ * @author Ilya Ryabukhin
+ * @since 18.04.2023
+ */
 public class ParticipanceListView extends VerticalLayout {
     Grid<Participance> grid = new Grid<>(Participance.class);
     ParticipanceService participanceService;
@@ -41,12 +47,17 @@ public class ParticipanceListView extends VerticalLayout {
         grid.setSizeFull();
         grid.setColumns("goals", "assists", "yellowCards", "redCards");
         grid.addColumn(participance -> participance.getPlayer().getName()).setHeader("Игрок").setKey("player");
+        grid.addColumn(participance -> "").setKey("rowIndex");
+        grid.addAttachListener(event -> grid.getColumnByKey("rowIndex").getElement().executeJs(
+                "this.renderer = function(root, column, rowData) {root.textContent = rowData.index + 1}"
+        ));
         grid.getColumnByKey("goals").setHeader("Голов");
         grid.getColumnByKey("assists").setHeader("Передач");
         grid.getColumnByKey("yellowCards").setHeader("ЖК");
         grid.getColumnByKey("redCards").setHeader("КК");
 
         grid.setColumnOrder(
+                grid.getColumnByKey("rowIndex"),
                 grid.getColumnByKey("player"),
                 grid.getColumnByKey("goals"),
                 grid.getColumnByKey("assists"),
@@ -55,6 +66,7 @@ public class ParticipanceListView extends VerticalLayout {
         );
 
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+        grid.getColumnByKey("rowIndex").setAutoWidth(false).setWidth("4em");
 
     }
 
